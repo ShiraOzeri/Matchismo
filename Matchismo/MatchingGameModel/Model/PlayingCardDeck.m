@@ -7,16 +7,16 @@
 //
 
 #import "PlayingCardDeck.h"
-#import "PlayingCard.h"
+#import "MatchingPlayingCard.h"
 
 @implementation PlayingCardDeck
 
 -(instancetype)init{
     self=[super init];
     if(self){
-        for(NSString *suit in [PlayingCard validSuits ]){
-            for(NSUInteger rank=1; rank<=[PlayingCard maxRank];rank++){
-                PlayingCard *card=[[PlayingCard alloc]init];
+        for(NSString *suit in [MatchingPlayingCard validSuits ]){
+            for(NSUInteger rank=1; rank<=[MatchingPlayingCard maxRank];rank++){
+                MatchingPlayingCard *card=[[MatchingPlayingCard alloc]init];
                 card.rank=rank;
                 card.suit=suit;
                 [self addCard:card];

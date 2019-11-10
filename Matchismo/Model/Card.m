@@ -20,7 +20,7 @@
 
 
 
--(int)match:(NSMutableArray *)otherCards
+- (NSInteger)match:(NSMutableArray *)otherCards
 {
     int score=0;
     for(Card *card in otherCards){

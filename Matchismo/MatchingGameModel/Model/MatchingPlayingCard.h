@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlayingCard : Card
+@interface MatchingPlayingCard : Card
 @property (strong, nonatomic) NSString *suit;
 @property (nonatomic) NSUInteger rank;
 
@@ -23,3 +23,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 NS_ASSUME_NONNULL_END
+

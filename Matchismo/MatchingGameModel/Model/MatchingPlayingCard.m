@@ -6,13 +6,14 @@
 //  Copyright © 2019 Shira Ozeri. All rights reserved.
 //
 
-#import "PlayingCard.h"
+#import "MatchingPlayingCard.h"
 
-@implementation PlayingCard
+@implementation MatchingPlayingCard
 @synthesize suit=_suit;
+# define NUM_OF_CHOSEN_MATCH_CARDS 2
 
 -(NSString *)contents{
-    return [NSString stringWithFormat:@"%@ %@", [[PlayingCard rankStrings] objectAtIndex:self.rank], self.suit];
+    return [NSString stringWithFormat:@"%@ %@", [[MatchingPlayingCard rankStrings] objectAtIndex:self.rank], self.suit];
 }
 
 +(NSArray *)validSuits{
@@ -24,7 +25,7 @@
 }
 
 +(NSInteger)maxRank{
-    return [[PlayingCard rankStrings] count]-1;
+    return [[MatchingPlayingCard rankStrings] count]-1;
 }
 
 
@@ -33,25 +34,28 @@
 }
 
 -(void)setSuit:(NSString *)suit{
-    if([[PlayingCard validSuits] containsObject:suit]){
+    if([[MatchingPlayingCard validSuits] containsObject:suit]){
         _suit=suit;
     }
 }
 
 -(void)setRank:(NSUInteger)rank{
-    if(rank<= [PlayingCard maxRank]){
+    if(rank<= [MatchingPlayingCard maxRank]){
         _rank=rank;
     }
 }
 
--(int)match:(NSMutableArray *)otherCards
-{
-    int score=0;
-    [otherCards addObject:self];
+- (NSInteger)match:(NSMutableArray *)otherCards{
+    int score = 0;
+  //  [otherCards addObject:self];
+    if(!(otherCards.count==NUM_OF_CHOSEN_MATCH_CARDS)) {
+    //    [otherCards removeObject:self];
 
-    for (int i=0; i<otherCards.count; i++) {
+        return -1;
+    }
+    for (int i = 0; i < otherCards.count; i++) {
         for (int j=i+1; j<otherCards.count; j++) {
-            if([[otherCards objectAtIndex:i] rank]==[[otherCards objectAtIndex:j] rank])
+            if ([[otherCards objectAtIndex:i] rank]==[[otherCards objectAtIndex:j] rank])
                 score+=4;
             if([[otherCards objectAtIndex:i] suit]==[[otherCards objectAtIndex:j] suit]){
                 score+=1;
@@ -61,7 +65,8 @@
         
         
     }
-    [otherCards removeObject:self];
+    
+ //   [otherCards removeObject:self];
     return score;
 }
 

@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deck.h"
+#import "CardGame.h"
 
 @interface ViewController : UIViewController
-@property (weak, nonatomic,readonly) IBOutlet UISegmentedControl *gamePlayMode;
 
+- (Deck *)createDeck;
+
+@property (strong, nonatomic) CardGame *game;
 
 
 @end
