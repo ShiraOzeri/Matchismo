@@ -12,121 +12,119 @@
 
 @property (nonatomic, strong) NSMutableArray *cards;
 @property (nonatomic,readwrite) NSInteger score;
-@property (nonatomic,getter=isFlagStateChange) BOOL flagStateChange;
+@property (strong, nonatomic) Deck *deck;
+@property (strong, nonatomic) NSArray<Card *> *chosenCards;
 
 @end
 
 @implementation CardGame
 
-
 static const NSInteger kMatchBonus = 4;
 static const NSInteger kCostToChoose = 1;
 static const NSInteger kMismatchPenalty = 2;
 
-
-
--(NSMutableArray *)cards{
-    if(!_cards) _cards=[[NSMutableArray alloc]init];
-    return _cards;
+- (NSMutableArray *)cards {
+  if(!_cards) _cards = [[NSMutableArray alloc] init];
+  return _cards;
 }
 
--(instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck{
-    //    self=[super init];
-    if(self=[super init]){
-        for(int i=0;i<count;i++){
-            Card *card=deck.drawRandomCard;
-            if(card)
-                self.cards[i]=card;
-            else{
-                self=nil;
-                break;
-            }
-        }
+- (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck {
+  self.deck = deck;
+  if (self = [super init]) {
+    for (int i = 0; i < count; i++) {
+      Card *card = [self.deck drawRandomCard];
+      if(card) {
+        self.cards[i]=card;
+      } else {
+        self = nil;
+        break;
+      }
     }
-    return self;
+  }
+  return self;
 }
 
+- (Card *)addCard {
+  Card *card = [self.deck drawRandomCard];
+  if (card) {
+    self.cards[[self.cards count]] = card;
+  } else {
+    return nil;
+  }
+  return card;
+}
 
--(Card *)cardAtIndex:(NSUInteger)index{
-    return (index<self.cards.count)? self.cards[index]: nil;
+- (Card *)cardAtIndex:(NSUInteger)index {
+  return (index < self.cards.count) ? self.cards[index] : nil;
 }
 
 //create array of the choosen cards
-
-- (NSMutableArray *)getChosenCards{
-    NSMutableArray *chosen=[[NSMutableArray alloc] init];
-    for (Card *otherCard in self.cards) {
-        if(otherCard.chosen && !otherCard.matched){
-            [chosen addObject:otherCard];
-            
-        }
+- (NSMutableArray *)getChosenCards {
+  NSMutableArray *chosen = [[NSMutableArray alloc] init];
+  for (Card *otherCard in self.cards) {
+    if (otherCard.chosen && !otherCard.matched) {
+      [chosen addObject : otherCard];
     }
-    return chosen;
-    
+  }
+  return chosen;
 }
 
--(void)chooseCardAtIndex:(NSUInteger)index{
-    self.flagStateChange=NO;
-    Card *card = [self cardAtIndex:index];
-    NSMutableArray *chosenCards;
-    self.status=[[Status alloc] initWithCards:chosenCards numberOfPoint:0 isMatch:NO selectedCard:card];
-    if(!card.isMatched){
-        if (card.isChosen) {
-            card.chosen=NO;
-
-        }
-        else {
-            chosenCards = [self getChosenCards];
-            NSMutableArray *allChosenCards=[[NSMutableArray alloc] initWithArray:chosenCards];
-            [allChosenCards addObject:card];
-            NSInteger matchScore = [card match:allChosenCards];
-            self.status.chosenCards=allChosenCards;
-
-            if (allChosenCards.count == [self numberOfValidMatch]){
-                //[allChosenCards addObject:card];
-                
-                if (matchScore > 0) {
-                    self.score+=matchScore*kMatchBonus;
-                    [self changeCardToMatch:allChosenCards];
-                    self.status.match=YES;
-                    self.status.points = (matchScore*(kMatchBonus));
-                    card.chosen=YES;
-                }
-                else {
-                    [self changeCardToNoChosen:chosenCards];
-                    self.score-=kMismatchPenalty;
-                    self.status.match = NO;
-                    self.status.points = kMismatchPenalty;
-                    self.flagStateChange=YES;
-                    card.chosen=YES;
-                }
-            } else {
-                card.chosen=YES;
-                self.status.match = NO;
-                self.status.points = kCostToChoose;
-            }
-            self.score-=kCostToChoose;
-//
-        }
-    }
-    
+- (NSInteger)indexOfCard:(Card *)card {
+  return [self.cards indexOfObject:card];
 }
 
--(NSInteger)numberOfValidMatch{
-    return 0;
+- (void)chooseCardAtIndex:(NSUInteger)index {
+  Card *card = [self cardAtIndex:index];
+  [self chooseCard:card];
 }
 
-
-- (void)changeCardToMatch:(NSMutableArray *)chosenCards{
-    for (Card *otherCard in chosenCards) {
-        otherCard.matched=YES;
+- (BOOL)chooseCard:(Card *)card {
+  NSMutableArray *chosenCards;
+  if (card.isMatched){
+    return NO;
+  }
+  if (card.isChosen) {
+    card.chosen=NO;
+    return NO;
+  } else {
+    chosenCards = [self getChosenCards];
+    NSMutableArray *allChosenCards = [[NSMutableArray alloc] initWithArray:chosenCards];
+    [allChosenCards addObject:card];
+    NSInteger matchScore = [card match:allChosenCards];
+    if (allChosenCards.count == [self numberOfValidMatch]) {
+      if (matchScore > 0) {
+        self.score += matchScore*kMatchBonus;
+        [self changeCardToMatch:allChosenCards];
+        card.chosen=YES;
+        self.score -= kCostToChoose;
+        return YES;
+      } else {
+        [self changeCardToNoChosen : chosenCards];
+        self.score -= kMismatchPenalty;
+        card.chosen=YES;
+      }
+    } else {
+      card.chosen = YES;
     }
+    self.score -= kCostToChoose;
+  }
+  return NO;
 }
 
-- (void)changeCardToNoChosen:(NSMutableArray *)chosenCards{
-    for (Card *otherCard in chosenCards) {
-        otherCard.chosen=NO;
-    }
+- (NSInteger)numberOfValidMatch {
+  return 0;
+}
+
+- (void)changeCardToMatch:(NSMutableArray *)chosenCards {
+  for (Card *otherCard in chosenCards) {
+    otherCard.matched = YES;
+  }
+}
+
+- (void)changeCardToNoChosen:(NSMutableArray *)chosenCards {
+  for (Card *otherCard in chosenCards) {
+    otherCard.chosen = NO;
+  }
 }
 
 @end

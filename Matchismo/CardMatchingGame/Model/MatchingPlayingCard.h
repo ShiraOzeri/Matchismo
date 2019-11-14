@@ -1,5 +1,5 @@
 //
-//  Deck.h
+//  PlayingCard.h
 //  Matchismo
 //
 //  Created by Shira Ozeri on 29/10/2019.
@@ -11,13 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Deck : NSObject
+@interface MatchingPlayingCard : Card
 
--(void)addCard:(Card *)card atTop:(BOOL)atTop;
--(void)addCard:(Card *)card;
--(Card *)drawRandomCard;
--(NSUInteger)countCard;
++ (NSArray<NSString *> *)validSuits;
++ (NSInteger)maxRank;
+
+@property (strong, nonatomic) NSString *suit;
+@property (nonatomic) NSUInteger rank;
 
 @end
 
 NS_ASSUME_NONNULL_END
+

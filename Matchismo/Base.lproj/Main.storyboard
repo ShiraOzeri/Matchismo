@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sOU-J2-pin">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hNC-M1-g5y">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -473,7 +473,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="matchingNewGame" destination="AVg-jS-SGP" id="7HX-hb-Fx5"/>
                         <outlet property="score" destination="NiC-rg-K1r" id="ZSF-NM-P74"/>
                         <outlet property="state" destination="pre-pN-2bg" id="kLK-Xy-NBR"/>
                         <outletCollection property="cardButtons" destination="Jy9-JP-BuU" id="EId-jW-Gbn"/>
@@ -789,7 +788,169 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38Q-5t-eve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3464.8000000000002" y="-350.2463054187192"/>
+            <point key="canvasLocation" x="3034" y="-408"/>
+        </scene>
+        <!--Matching Game-->
+        <scene sceneID="baS-5A-Oro">
+            <objects>
+                <viewController id="ShU-wi-Psg" customClass="PlaynigCardGameViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iOC-Y9-q24">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kn-aV-QO9">
+                                <rect key="frame" x="16" y="44" width="343" height="647"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nP6-np-1Uo">
+                                <rect key="frame" x="16" y="699" width="90" height="30"/>
+                                <state key="normal" title="2 more cards"/>
+                                <connections>
+                                    <action selector="presentMoreCards:" destination="ShU-wi-Psg" eventType="touchUpInside" id="Pt7-C7-dFh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqC-j8-RB9">
+                                <rect key="frame" x="142.66666666666666" y="699" width="90" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A49-zF-Ubs">
+                                <rect key="frame" x="269" y="699" width="90" height="30"/>
+                                <state key="normal" title="New Game"/>
+                                <connections>
+                                    <action selector="startNewGame:" destination="ShU-wi-Psg" eventType="touchUpInside" id="PJb-vH-do2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="A49-zF-Ubs" firstAttribute="height" secondItem="nP6-np-1Uo" secondAttribute="height" id="02H-vR-AC0"/>
+                            <constraint firstItem="8kn-aV-QO9" firstAttribute="leading" secondItem="iOC-Y9-q24" secondAttribute="leadingMargin" id="5Ji-qI-pc0"/>
+                            <constraint firstItem="8kn-aV-QO9" firstAttribute="leading" secondItem="nP6-np-1Uo" secondAttribute="leading" id="5tC-OL-JN9"/>
+                            <constraint firstItem="8kn-aV-QO9" firstAttribute="centerX" secondItem="UqC-j8-RB9" secondAttribute="centerX" id="5zn-f5-G33"/>
+                            <constraint firstItem="8kn-aV-QO9" firstAttribute="trailing" secondItem="A49-zF-Ubs" secondAttribute="trailing" id="DWR-h7-DYS"/>
+                            <constraint firstItem="A49-zF-Ubs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UqC-j8-RB9" secondAttribute="trailing" id="ExS-2C-ePL"/>
+                            <constraint firstItem="UqC-j8-RB9" firstAttribute="width" secondItem="nP6-np-1Uo" secondAttribute="width" id="Gco-zP-AUt"/>
+                            <constraint firstItem="nP6-np-1Uo" firstAttribute="bottom" secondItem="UqC-j8-RB9" secondAttribute="bottom" id="Njr-kz-n5H"/>
+                            <constraint firstItem="A49-zF-Ubs" firstAttribute="width" secondItem="nP6-np-1Uo" secondAttribute="width" id="PVe-G2-paZ"/>
+                            <constraint firstItem="A49-zF-Ubs" firstAttribute="top" secondItem="8kn-aV-QO9" secondAttribute="bottom" constant="8" symbolic="YES" id="XQ7-7r-azn"/>
+                            <constraint firstItem="8kn-aV-QO9" firstAttribute="trailing" secondItem="iOC-Y9-q24" secondAttribute="trailingMargin" id="a6h-zK-nvt"/>
+                            <constraint firstItem="nP6-np-1Uo" firstAttribute="bottom" secondItem="3rn-iF-PNu" secondAttribute="bottom" id="aJN-Fe-66j"/>
+                            <constraint firstItem="UqC-j8-RB9" firstAttribute="height" secondItem="nP6-np-1Uo" secondAttribute="height" id="dj4-5x-JjQ"/>
+                            <constraint firstItem="nP6-np-1Uo" firstAttribute="top" secondItem="8kn-aV-QO9" secondAttribute="bottom" symbolic="YES" id="gL3-fX-cnR"/>
+                            <constraint firstItem="8kn-aV-QO9" firstAttribute="top" secondItem="3rn-iF-PNu" secondAttribute="top" id="gLa-cw-b60"/>
+                            <constraint firstItem="UqC-j8-RB9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nP6-np-1Uo" secondAttribute="trailing" id="tYa-iv-B3i"/>
+                            <constraint firstItem="UqC-j8-RB9" firstAttribute="bottom" secondItem="A49-zF-Ubs" secondAttribute="bottom" id="vUW-dw-RAb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3rn-iF-PNu"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Matching Game" id="LtI-lh-2yA"/>
+                    <connections>
+                        <outlet property="addMoreCard" destination="nP6-np-1Uo" id="QZv-qW-nwB"/>
+                        <outlet property="score" destination="UqC-j8-RB9" id="Mlb-De-0KV"/>
+                        <outlet property="startNewGAme" destination="A49-zF-Ubs" id="5du-Vz-2Ua"/>
+                        <outlet property="superView" destination="8kn-aV-QO9" id="ZyL-BZ-jDe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xi9-R2-Hr3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5293.6000000000004" y="49.50738916256158"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="G7X-Y0-Jpu">
+            <objects>
+                <tabBarController id="hNC-M1-g5y" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Aaf-Ym-wnn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="R2M-DD-sys" kind="relationship" relationship="viewControllers" id="tIn-Tx-vzK"/>
+                        <segue destination="ShU-wi-Psg" kind="relationship" relationship="viewControllers" id="fEe-Qo-bP9"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AKc-tf-cJ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4140" y="-355"/>
+        </scene>
+        <!--Set-->
+        <scene sceneID="Cr8-Ag-n1S">
+            <objects>
+                <viewController id="R2M-DD-sys" customClass="SetViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ego-vW-3RN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xvx-Rn-99p">
+                                <rect key="frame" x="16" y="44" width="343" height="636"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UAU-KM-eee">
+                                <rect key="frame" x="0.0" y="701" width="375" height="28"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrT-fV-Zrn">
+                                        <rect key="frame" x="291.66666666666669" y="-1" width="75.333333333333314" height="30"/>
+                                        <state key="normal" title="New Game"/>
+                                        <connections>
+                                            <action selector="startNewGame:" destination="R2M-DD-sys" eventType="touchUpInside" id="f2t-bb-7cF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgY-SP-slk">
+                                        <rect key="frame" x="8" y="-1" width="90.666666666666671" height="30"/>
+                                        <state key="normal" title="3 more cards"/>
+                                        <connections>
+                                            <action selector="presentMoreCards:" destination="R2M-DD-sys" eventType="touchUpInside" id="a4X-8e-xnd"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbW-k3-IDW">
+                                        <rect key="frame" x="157.66666666666666" y="4" width="59.666666666666657" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="sbW-k3-IDW" firstAttribute="centerY" secondItem="zrT-fV-Zrn" secondAttribute="centerY" id="1r0-ed-7Ef"/>
+                                    <constraint firstItem="zrT-fV-Zrn" firstAttribute="trailing" secondItem="UAU-KM-eee" secondAttribute="trailingMargin" id="ZYH-wV-zhF"/>
+                                    <constraint firstItem="sbW-k3-IDW" firstAttribute="leading" secondItem="fgY-SP-slk" secondAttribute="trailing" constant="59" id="cRP-2x-zvC"/>
+                                    <constraint firstItem="sbW-k3-IDW" firstAttribute="centerX" secondItem="UAU-KM-eee" secondAttribute="centerX" id="fnj-qH-Pdr"/>
+                                    <constraint firstItem="zrT-fV-Zrn" firstAttribute="centerY" secondItem="UAU-KM-eee" secondAttribute="centerY" id="lCF-b6-0yA"/>
+                                    <constraint firstItem="fgY-SP-slk" firstAttribute="centerY" secondItem="UAU-KM-eee" secondAttribute="centerY" id="rTz-Ir-A7l"/>
+                                    <constraint firstItem="fgY-SP-slk" firstAttribute="leading" secondItem="UAU-KM-eee" secondAttribute="leadingMargin" id="wXP-Nt-PoD"/>
+                                    <constraint firstItem="zrT-fV-Zrn" firstAttribute="leading" secondItem="sbW-k3-IDW" secondAttribute="trailing" constant="74.333333333333343" id="xSu-SJ-TAR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="UAU-KM-eee" firstAttribute="centerX" secondItem="xvx-Rn-99p" secondAttribute="centerX" id="1rn-ev-ybs"/>
+                            <constraint firstItem="xvx-Rn-99p" firstAttribute="top" secondItem="5wl-Bz-uwR" secondAttribute="top" id="2Ub-U5-MD5"/>
+                            <constraint firstItem="UAU-KM-eee" firstAttribute="bottom" secondItem="5wl-Bz-uwR" secondAttribute="bottom" id="Afy-Kf-9fl"/>
+                            <constraint firstItem="UAU-KM-eee" firstAttribute="top" secondItem="xvx-Rn-99p" secondAttribute="bottom" constant="21" id="Jpd-Mw-PcA"/>
+                            <constraint firstItem="UAU-KM-eee" firstAttribute="leading" secondItem="5wl-Bz-uwR" secondAttribute="leading" id="RHl-ZU-wnR"/>
+                            <constraint firstItem="xvx-Rn-99p" firstAttribute="trailing" secondItem="ego-vW-3RN" secondAttribute="trailingMargin" id="Uqa-YS-mTH"/>
+                            <constraint firstItem="xvx-Rn-99p" firstAttribute="leading" secondItem="ego-vW-3RN" secondAttribute="leadingMargin" id="bkC-ev-yUD"/>
+                            <constraint firstAttribute="bottom" secondItem="xvx-Rn-99p" secondAttribute="bottom" constant="132" id="hRT-TC-VoC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5wl-Bz-uwR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Set" id="Xim-iL-0PA"/>
+                    <connections>
+                        <outlet property="addMoreCard" destination="fgY-SP-slk" id="RjW-qC-6hY"/>
+                        <outlet property="score" destination="sbW-k3-IDW" id="cXB-BI-bZE"/>
+                        <outlet property="startNewGAme" destination="zrT-fV-Zrn" id="ugN-qj-E12"/>
+                        <outlet property="superView" destination="xvx-Rn-99p" id="xPu-10-LZb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvt-Wd-zgG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5293.6000000000004" y="-624.38423645320199"/>
         </scene>
         <!--Matching Game-->
         <scene sceneID="tiD-Pm-l15">
@@ -834,6 +995,6 @@
         <image name="cardback" width="64" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qca-4H-NNn"/>
+        <segue reference="cu6-bN-XWd"/>
     </inferredMetricsTieBreakers>
 </document>
